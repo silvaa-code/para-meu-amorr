@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Minha Deusa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose-100: #ffe4ec;
+            --rose-400: #ff6fa3;
+            --gold-300: #ffd778;
+            --gold-500: #e7b84b;
+            --ivory: #fffaf2;
+            --ink: #2a2a2a;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 16px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --rose-100: #3a2a30;
+                --rose-400: #ff6fa3;
+                --gold-300: #ffc95f;
+                --gold-500: #e7b84b;
+                --ivory: #1a1a1a;
+                --ink: #fffaf2;
+                --shadow: 0 4px 12px rgba(255, 255, 255, 0.08);
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--ivory);
+            color: var(--ink);
+            background: linear-gradient(135deg, var(--ivory) 0%, var(--rose-100) 50%, var(--ivory) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 25s ease infinite;
+            line-height: 1.6;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            body {
+                animation: gradientShift 25s ease infinite;
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            box-sizing: border-box;
+            z-index: 1000;
+            background-color: rgba(255, 250, 242, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 111, 163, 0.1);
+        }
+
+        header .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--rose-400);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 8px;
+        }
+
+        .hamburger-menu span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--ink);
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger-menu.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger-menu.active span:nth-child(2) { opacity: 0; }
+        .hamburger-menu.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .nav-menu {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--ivory);
+            z-index: 999;
+            padding-top: 60px;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .nav-menu.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .nav-menu a {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--rose-400);
+            text-decoration: none;
+            padding: 1rem;
+            display: block;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover, .nav-menu a:focus {
+            color: var(--gold-500);
+        }
+
+        main {
+            padding: 1rem;
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 3rem 0;
+            min-height: 60vh;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            color: var(--ink);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23ffd778' fill-opacity='0.1' d='M200 0h-53.7C107.5 0 85.7 13.9 85.7 31.8v101c0 17.9 21.8 31.8 60.6 31.8h53.7V200H0V0h200z'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+            opacity: 0.2;
+            z-index: -1;
+            transform: rotate(15deg);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--rose-400);
+            text-shadow: var(--shadow);
+            margin-top: 0;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 320px;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .btn {
+            background-color: var(--rose-400);
+            color: var(--ivory);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn:hover, .btn:focus {
+            background-color: var(--gold-500);
+            transform: translateY(-3px);
+            outline: 2px solid var(--gold-500);
+            outline-offset: 2px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: var(--gold-300);
+        }
+
+        .timeline-card {
+            position: relative;
+            padding: 1.5rem;
+            background-color: var(--ivory);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin: 2rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .timeline-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: var(--gold-500);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            z-index: 1;
+        }
+        
+        .timeline-card.left::before { left: calc(50% - 10px); }
+        .timeline-card.right::before { left: calc(50% + 10px); }
+
+        .timeline-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            vertical-align: middle;
+            fill: var(--rose-400);
+        }
+
+        @media (min-width: 500px) {
+            .timeline-card.left { transform: translateX(-50%); }
+            .timeline-card.right { transform: translateX(50%); }
+            .timeline-card.left::before { left: -10px; }
+            .timeline-card.right::before { right: -10px; left: auto;}
+            .timeline::before { left: 50%; }
+        }
+
+        .depoimentos .carousel {
+            position: relative;
+            height: 120px;
+            overflow: hidden;
+        }
+
+        .depoimentos .carousel-item {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            font-style: italic;
+        }
+
+        .depoimentos .carousel-item.active {
+            opacity: 1;
+        }
+
+        .counter {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .deusa-section {
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .deusa-section p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .laurel-svg {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            fill: var(--gold-500);
+            opacity: 0.3;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .laurel-left {
+            left: 0;
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .laurel-right {
+            right: 0;
+            transform: translateY(-50%);
+        }
+        
+        .sparkle {
+            position: relative;
+            display: inline-block;
+        }
+
+        .sparkle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background-color: var(--gold-300);
+            opacity: 0;
+            animation: sparkle-glow 3s infinite ease-in-out;
+        }
+
+        @keyframes sparkle-glow {
+            0%, 100% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.5); opacity: 0.8; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .sparkle::after { animation: none; }
+        }
+
+        .list-animated {
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+
+        .list-animated li {
+            padding: 1rem;
+            background-color: var(--ivory);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .list-animated li.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .list-animated .more-items {
+            display: none;
+        }
+
+        .list-animated .show-more-btn {
+            display: block;
+            margin: 1rem auto;
+            background-color: transparent;
+            color: var(--rose-400);
+            border: 2px solid var(--rose-400);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .list-animated .show-more-btn:hover {
+            background-color: var(--rose-400);
+            color: var(--ivory);
+        }
+        
+        .carinho-card {
+            background-color: var(--rose-100);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        #random-carinho {
+            min-height: 60px;
+            font-style: italic;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--ink);
+            color: var(--ivory);
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .checklist li {
+            list-style: none;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .checklist input[type="checkbox"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 2px solid var(--rose-400);
+            cursor: pointer;
+            position: relative;
+            outline-offset: 4px;
+        }
+        
+        .checklist input[type="checkbox"]:checked {
+            background-color: var(--rose-400);
+        }
+
+        .checklist input[type="checkbox"]:checked::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 12px;
+            height: 6px;
+            border: 2px solid var(--ivory);
+            border-top: none;
+            border-right: none;
+            transform: rotate(-45deg);
+        }
+        
+        .checklist-badge {
+            display: none;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gold-500);
+            text-align: center;
+        }
+        
+        .journal-card {
+            background-color: var(--ivory);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .journal-card textarea {
+            width: 100%;
+            height: 150px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .journal-card .buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .journal-card button {
+            background-color: var(--rose-400);
+            color: var(--ivory);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .journal-card button:hover {
+            background-color: var(--gold-500);
+        }
+        
+        .final-message {
+            text-align: center;
+            font-size: 1.2rem;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--ink);
+            position: relative;
+            display: inline-block;
+            margin-top: 2rem;
+            line-height: 1;
+        }
+
+        .signature::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--gold-300);
+            animation: underline-shine 5s infinite;
+        }
+        
+        @keyframes underline-shine {
+            0% { transform: scaleX(0); transform-origin: left; }
+            50% { transform: scaleX(1); transform-origin: left; }
+            50.1% { transform-origin: right; }
+            100% { transform: scaleX(0); transform-origin: right; }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.8rem;
+            color: var(--ink);
+            border-top: 1px solid rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .footer a {
+            color: var(--rose-400);
+            text-decoration: none;
+        }
+
+        .privacy-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .privacy-content {
+            background-color: var(--ivory);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            max-width: 90%;
+            text-align: left;
+        }
+        
+        .privacy-content button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--rose-400);
+            color: var(--ivory);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+        
+        .dark-mode {
+            --rose-100: #3a2a30;
+            --rose-400: #ff6fa3;
+            --gold-300: #ffc95f;
+            --gold-500: #e7b84b;
+            --ivory: #1a1a1a;
+            --ink: #fffaf2;
+            background: linear-gradient(135deg, #1a1a1a 0%, #3a2a30 50%, #1a1a1a 100%);
+        }
+        
+        .dark-mode header {
+            background-color: rgba(26, 26, 26, 0.8);
+            border-bottom: 1px solid rgba(255, 111, 163, 0.3);
+        }
+        
+        .dark-mode .timeline-card, .dark-mode .journal-card {
+            background-color: #2a2a2a;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.08);
+        }
+
+        @media (max-width: 500px) {
+            header .logo { font-size: 1.2rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .timeline::before { left: 50%; }
+            .timeline-card.left::before, .timeline-card.right::before { left: 50%; transform: translateX(-50%) translateY(-50%); }
+        }
+        
+        @media (min-width: 768px) {
+            .hamburger-menu { display: none; }
+            .nav-menu {
+                display: flex;
+                position: static;
+                flex-direction: row;
+                height: auto;
+                opacity: 1;
+                padding-top: 0;
+                background: none;
+                list-style: none;
+            }
+            .nav-menu a {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+        
+        /* Acessibilidade */
+        :focus-visible {
+            outline: 2px solid var(--rose-400);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#hero" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Coração" role="img">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            Nosso Cantinho
+        </a>
+        <button class="hamburger-menu" aria-label="Abrir menu de navegação" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#timeline">Nosso Jeitinho</a></li>
+                <li><a href="#depoimentos">Carinho</a></li>
+                <li><a href="#promessas">Promessas</a></li>
+                <li><a href="#final">Final</a></li>
+                <li><button id="toggle-theme" aria-label="Alternar modo serenidade">🌙</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <h1 id="rotator-text"></h1>
+            <p>Hoje eu só quero te lembrar do quanto você é rara e luminosa.</p>
+            <a href="#timeline" class="btn">Começar a leitura</a>
+        </section>
+
+        <section id="timeline">
+            <h2>Nosso jeitinho de acontecer</h2>
+            <div class="timeline">
+                <div class="timeline-card left">
+                    <p><svg class="timeline-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> O primeiro dia em que a conversa fluiu fácil. Um dia que parecia normal, mas já era especial.</p>
+                </div>
+                <div class="timeline-card right">
+                    <p><svg class="timeline-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Quando percebi que seu sorriso me acalmava. Meu amor, seu riso é meu porto seguro.</p>
+                </div>
+                <div class="timeline-card left">
+                    <p><svg class="timeline-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.7L11 14.99l-2.59-2.59L7 13.41l4 4 6-6-1.41-1.41z"/></svg> O momento em que eu soube: você é abrigo. Minha garotinha, com você, eu me sinto em casa.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="depoimentos">
+            <h2>Todo mundo acha você linda</h2>
+            <div class="carousel">
+                <div class="carousel-item active">
+                    <p>"Até quando você não percebe, você ilumina o mundo à sua volta, Mia."</p>
+                </div>
+                <div class="carousel-item">
+                    <p>"Seu riso é a parte favorita do meu dia, Amor. É a melodia mais linda."</p>
+                </div>
+                <div class="carousel-item">
+                    <p>"Quem te conhece, admira — não tem como não, minha princesa."</p>
+                </div>
+            </div>
+            <div class="counter">
+                <span id="smiles-counter">0</span> sorrisos arrancados hoje.
+            </div>
+        </section>
+
+        <section id="deusa" class="deusa-section">
+            <h2 class="section-header">Deusa Grega aos meus olhos</h2>
+            <p>
+                <svg class="laurel-svg laurel-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 11.23l-1.92 1.39.73 2.27-1.92-1.39-1.92 1.39.73-2.27L3 9.4l2.76.01L7.5 7.15l1.92 2.25L12 11.23zM21 9.4l-2.76.01L15.5 7.15l-1.92 2.25L12 11.23l1.92-1.39-.73-2.27L15.5 9.4l2.76.01L21 9.4z"/></svg>
+                Não é apenas sobre a sua beleza, <span class="sparkle">Meu amor</span>. Aos meus olhos, você tem a força de uma deusa, a doçura de uma ninfa e a beleza serena que só se encontra nas estátuas mais raras. Você é rara, única e impossível de não admirar.
+                <svg class="laurel-svg laurel-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 11.23l-1.92 1.39.73 2.27-1.92-1.39-1.92 1.39.73-2.27L3 9.4l2.76.01L7.5 7.15l1.92 2.25L12 11.23zM21 9.4l-2.76.01L15.5 7.15l-1.92 2.25L12 11.23l1.92-1.39-.73-2.27L15.5 9.4l2.76.01L21 9.4z"/></svg>
+            </p>
+        </section>
+
+        <section id="lista">
+            <h2>100 motivos que começam por 10</h2>
+            <ul class="list-animated">
+                <li>1. A forma como seus olhos brilham quando você fala sobre algo que ama.</li>
+                <li>2. Seu abraço, que sempre me lembra de casa.</li>
+                <li>3. A sua risada, que é o meu som favorito no mundo.</li>
+                <li>4. O seu cuidado genuíno com as pessoas que ama.</li>
+                <li>5. A sua capacidade de ser forte e doce ao mesmo tempo, minha princesa.</li>
+                <li>6. A maneira como você se dedica aos seus sonhos.</li>
+                <li>7. Sua lealdade, que me mostra a preciosidade da sua alma.</li>
+                <li>8. O jeito que você resolve problemas com uma calma que me impressiona.</li>
+                <li>9. O simples fato de você existir e ser quem você é, Mia.</li>
+                <li>10. A paz que sua presença traz para o meu dia a dia.</li>
+                <div class="more-items">
+                    <li>11. Como você me faz querer ser uma pessoa melhor.</li>
+                    <li>12. A sua paciência em me ouvir, mesmo nas bobagens.</li>
+                    <li>13. O seu cheiro, que é uma das minhas memórias favoritas.</li>
+                    <li>14. A sua forma única de encarar a vida, amor.</li>
+                    <li>15. Sua coragem de ser vulnerável e mostrar seus sentimentos.</li>
+                </div>
+            </ul>
+            <button class="show-more-btn" aria-label="Mostrar mais motivos">Mostrar mais</button>
+        </section>
+
+        <section id="carinho">
+            <h2 class="section-header">Gotas de carinho</h2>
+            <div class="carinho-card">
+                <p id="random-carinho">Toque no botão e receba uma gotinha de carinho.</p>
+                <button id="get-carinho-btn" class="btn" aria-label="Gerar carinho">Quero um carinho agora</button>
+                <button id="copy-carinho-btn" style="display: none; margin-top: 1rem; background-color: transparent; border: 1px solid var(--ink); color: var(--ink); padding: 0.5rem 1rem; border-radius: 50px;">Copiar</button>
+            </div>
+            <div id="toast" class="toast">Copiado!</div>
+        </section>
+
+        <section id="promessas">
+            <h2 class="section-header">Promessas simples que eu cumpro</h2>
+            <ul class="checklist">
+                <li>
+                    <input type="checkbox" id="promessa1">
+                    <label for="promessa1">Te ouvir sem interromper, Mia.</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="promessa2">
+                    <label for="promessa2">Celebrar suas pequenas vitórias, minha princesa.</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="promessa3">
+                    <label for="promessa3">Te lembrar do quão especial você é.</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="promessa4">
+                    <label for="promessa4">Elogiar sua inteligência e sua força, meu amor.</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="promessa5">
+                    <label for="promessa5">Respeitar seu espaço e seu tempo, minha garotinha.</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="promessa6">
+                    <label for="promessa6">Estar ao seu lado em todos os momentos.</label>
+                </li>
+            </ul>
+            <p id="badge" class="checklist-badge">Compromisso ativo 💛</p>
+        </section>
+        
+        <section id="diario">
+            <h2 class="section-header">Diário da Minha Garotinha</h2>
+            <div class="journal-card">
+                <p>Aqui, neste espaço só nosso, você pode escrever uma lembrança boa ou um elogio. Fica salvo só no seu aparelho.</p>
+                <textarea id="journal-entry" placeholder="Escreva algo lindo aqui..."></textarea>
+                <div class="buttons">
+                    <button id="save-journal">Salvar</button>
+                    <button id="clear-journal">Limpar</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="final">
+            <div class="final-message">
+                <h2 class="section-header">Uma mensagem só nossa</h2>
+                <p>
+                    Minha princesa, eu te escolhi e te escolho todos os dias, não pela sua perfeição, mas porque te admiro, te respeito e te amo por inteira. Você é insubstituível. E o que a gente tem não é sobre ser perfeito, é sobre cuidar, estar presente e se lembrar que, juntos, somos um abrigo.
+                </p>
+                <p class="signature">Lucas</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Feito com 💛 por Lucas</p>
+        <p><a href="#top">Voltar ao topo</a> | <a href="#" id="privacy-link">Privacidade & Notas</a></p>
+    </footer>
+
+    <div id="privacy-modal" class="privacy-modal" aria-modal="true" role="dialog" aria-labelledby="privacy-title">
+        <div class="privacy-content">
+            <h3 id="privacy-title">Privacidade & Notas</h3>
+            <p>Este site foi feito para ser um cantinho nosso, seguro e totalmente offline.</p>
+            <ul>
+                <li><strong>Sem dados pessoais:</strong> Não coletamos nenhum tipo de dado seu.</li>
+                <li><strong>LocalStorage:</strong> Usamos o armazenamento local do seu navegador para salvar seu progresso na checklist e as anotações do diário. Tudo fica salvo apenas no seu dispositivo e não é enviado para lugar nenhum.</li>
+                <li><strong>Sem cookies:</strong> Nada de cookies de rastreamento. Apenas o essencial para o funcionamento do site.</li>
+            </ul>
+            <button id="close-privacy" aria-label="Fechar">Entendi</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Acessibilidade: prefers-reduced-motion
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+            const motionElements = document.querySelectorAll('.timeline-card, .list-animated li');
+
+            if (prefersReducedMotion.matches) {
+                document.body.classList.add('reduced-motion');
+                motionElements.forEach(el => el.style.transition = 'none');
+            }
+            
+            // Header e Menu Hambúrguer
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-menu a');
+
+            hamburger.addEventListener('click', () => {
+                const isExpanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+                hamburger.setAttribute('aria-expanded', !isExpanded);
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                if (!isExpanded) {
+                    navLinks[0].focus();
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // Rotator de Apelidos
+            const rotatorText = document.getElementById('rotator-text');
+            const nicknames = ['Mia', 'Amor', 'Minha garotinha', 'Meu amor', 'Minha princesa'];
+            let currentNicknameIndex = 0;
+
+            function updateRotator() {
+                rotatorText.style.opacity = 0;
+                setTimeout(() => {
+                    rotatorText.textContent = nicknames[currentNicknameIndex];
+                    rotatorText.style.opacity = 1;
+                    currentNicknameIndex = (currentNicknameIndex + 1) % nicknames.length;
+                }, 1000);
+            }
+            setInterval(updateRotator, 3000);
+            updateRotator();
+
+            // IntersectionObserver para cards e listas
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            document.querySelectorAll('.timeline-card, .list-animated li').forEach(card => {
+                observer.observe(card);
+            });
+
+            // Carrossel textual
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            let currentCarouselIndex = 0;
+            let carouselInterval;
+            
+            function showCarouselItem(index) {
+                carouselItems.forEach(item => item.classList.remove('active'));
+                carouselItems[index].classList.add('active');
+            }
+
+            function startCarousel() {
+                carouselInterval = setInterval(() => {
+                    currentCarouselIndex = (currentCarouselIndex + 1) % carouselItems.length;
+                    showCarouselItem(currentCarouselIndex);
+                }, 5000);
+            }
+            startCarousel();
+
+            document.querySelector('.carousel').addEventListener('mouseenter', () => clearInterval(carouselInterval));
+            document.querySelector('.carousel').addEventListener('mouseleave', startCarousel);
+            document.querySelector('.carousel').addEventListener('touchstart', () => clearInterval(carouselInterval));
+            document.querySelector('.carousel').addEventListener('touchend', startCarousel);
+
+            // Contador de sorrisos
+            const smilesCounter = document.getElementById('smiles-counter');
+            let smilesCount = 0;
+            function animateSmilesCounter() {
+                const targetCount = 75; // Um valor pequeno e animado
+                const duration = 2000;
+                let startTime = null;
+
+                function step(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    const progress = timestamp - startTime;
+                    const value = Math.min(progress / duration, 1) * targetCount;
+                    smilesCounter.textContent = Math.floor(value);
+                    if (progress < duration) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        smilesCounter.textContent = targetCount;
+                    }
+                }
+                window.requestAnimationFrame(step);
+            }
+            const counterObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    animateSmilesCounter();
+                    counterObserver.unobserve(entries[0].target);
+                }
+            }, { threshold: 0.5 });
+            counterObserver.observe(document.querySelector('.counter'));
+            
+            // Botão "Mostrar mais"
+            const showMoreBtn = document.querySelector('.show-more-btn');
+            const moreItems = document.querySelector('.more-items');
+            showMoreBtn.addEventListener('click', () => {
+                moreItems.style.display = 'block';
+                showMoreBtn.style.display = 'none';
+                document.querySelectorAll('.more-items li').forEach(item => observer.observe(item));
+            });
+
+            // Gotas de carinho
+            const carinhoBtn = document.getElementById('get-carinho-btn');
+            const copyCarinhoBtn = document.getElementById('copy-carinho-btn');
+            const carinhoText = document.getElementById('random-carinho');
+            const carinhos = [
+                'Você é a pessoa mais incrível que eu conheço, Mia.',
+                'Seu sorriso ilumina qualquer lugar, Amor.',
+                'O seu coração é gigante, e eu tenho sorte de estar perto dele.',
+                'Minha garotinha, sua força é a minha inspiração.',
+                'Você é a beleza em pessoa, por dentro e por fora, meu amor.',
+                'Sua voz é a melhor melodia que já ouvi, princesa.',
+                'O mundo é mais colorido com você nele.',
+                'Você tem o dom de tornar tudo melhor.',
+                'Sua inteligência me fascina, Mia.',
+                'Eu me sinto em casa quando estou com você.',
+                'Você é pura poesia, Amor.',
+                'Sua lealdade é um tesouro.',
+                'Cada detalhe seu me encanta.',
+                'Sua presença tem o poder de acalmar qualquer tempestade.',
+                'Meu amor, você me faz querer ser melhor.',
+            ];
+
+            carinhoBtn.addEventListener('click', () => {
+                const randomCarinho = carinhos[Math.floor(Math.random() * carinhos.length)];
+                let i = 0;
+                carinhoText.textContent = '';
+                copyCarinhoBtn.style.display = 'none';
+                
+                function typeWriter() {
+                    if (i < randomCarinho.length) {
+                        carinhoText.textContent += randomCarinho.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    } else {
+                        copyCarinhoBtn.style.display = 'inline-block';
+                    }
+                }
+                typeWriter();
+            });
+            
+            copyCarinhoBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(carinhoText.textContent).then(() => {
+                    const toast = document.getElementById('toast');
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 2000);
+                });
+            });
+
+            // Checklist de Promessas (localStorage)
+            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+            const badge = document.getElementById('badge');
+
+            checkboxes.forEach(checkbox => {
+                const isChecked = localStorage.getItem(checkbox.id) === 'true';
+                checkbox.checked = isChecked;
+
+                checkbox.addEventListener('change', () => {
+                    localStorage.setItem(checkbox.id, checkbox.checked);
+                    checkAllPromises();
+                });
+            });
+
+            function checkAllPromises() {
+                const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+                badge.style.display = allChecked ? 'block' : 'none';
+            }
+            checkAllPromises();
+
+            // Diário (localStorage)
+            const journalTextarea = document.getElementById('journal-entry');
+            const saveJournalBtn = document.getElementById('save-journal');
+            const clearJournalBtn = document.getElementById('clear-journal');
+
+            journalTextarea.value = localStorage.getItem('journal-entry') || '';
+
+            saveJournalBtn.addEventListener('click', () => {
+                localStorage.setItem('journal-entry', journalTextarea.value);
+                alert('Salvo neste dispositivo!');
+            });
+
+            clearJournalBtn.addEventListener('click', () => {
+                journalTextarea.value = '';
+                localStorage.removeItem('journal-entry');
+            });
+            
+            // Modal de Privacidade
+            const privacyLink = document.getElementById('privacy-link');
+            const privacyModal = document.getElementById('privacy-modal');
+            const closePrivacyBtn = document.getElementById('close-privacy');
+            
+            privacyLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                privacyModal.style.display = 'flex';
+            });
+            
+            closePrivacyBtn.addEventListener('click', () => {
+                privacyModal.style.display = 'none';
+            });
+            
+            // Tema escuro (Modo Serenidade)
+            const toggleThemeBtn = document.getElementById('toggle-theme');
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.body.classList.add('dark-mode');
+                toggleThemeBtn.textContent = '☀️';
+            }
+
+            toggleThemeBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    toggleThemeBtn.textContent = '☀️';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    toggleThemeBtn.textContent = '🌙';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
